@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
@@ -15,16 +15,25 @@ export default {
     };
   },
 
-  middleware({ store, redirect }) {
-    if (!store.state.authenticated) {
-      return redirect('/login');
+  beforeMount() {
+    const is_auth = localStorage.getItem('auth');
+
+    this.setAuthentication(is_auth);
+
+    if (!is_auth) {
+      this.$router.push({
+        path: '/login',
+      });
     }
   },
-
   computed: {
     ...mapState('user', {
       user_name: 'user',
     }),
+  },
+
+  methods: {
+    ...mapMutations({ setAuthentication: 'user/setAuthentication' }),
   },
 };
 </script>
