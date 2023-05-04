@@ -85,7 +85,7 @@ export default {
   methods: {
     ...mapMutations({
       setUser: 'user/setUser',
-			setAuthentication: 'user/setAuthentication',
+      setAuthentication: 'user/setAuthentication',
     }),
 
     submitHandler() {
@@ -93,17 +93,15 @@ export default {
         this.loading = true;
 
         this.setUser(this.name);
-				this.setAuthentication(true);
+        this.setAuthentication(true);
 
-	        setTimeout(() => {
+        setTimeout(() => {
           this.loading = false;
           this.snackbar = true;
+          this.$router.push({
+            path: '/',
+          });
         }, 3000);
-
-				this.$router.push({
-					path: '/',
-				});
-
       }
     },
   },
