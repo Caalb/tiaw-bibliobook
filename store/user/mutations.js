@@ -4,6 +4,7 @@ export default {
   },
 
   setAuthentication (state, flag) {
+    localStorage.setItem('auth', flag);
     state.auth = flag;
   },
 };
