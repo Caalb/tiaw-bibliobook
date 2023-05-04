@@ -4,7 +4,7 @@
 	</v-app>
 </template>
 
-<script lang="ts">
+<script>
 import { mapState, mapMutations } from 'vuex';
 
 export default {
@@ -20,7 +20,7 @@ export default {
 
     this.setAuthentication(is_auth);
 
-    if (!is_auth) {
+    if (! is_auth || is_auth === "null") {
       this.$router.push({
         path: '/login',
       });
