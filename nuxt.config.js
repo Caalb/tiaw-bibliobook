@@ -17,7 +17,13 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/site.webmanifest' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -63,6 +69,16 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+        },
+
+        light: {
+          primary: "#00bcd4",
+          secondary: "#8bc34a",
+          accent: "#3f51b5",
+          error: "#e91e63",
+          warning: "#ffeb3b",
+          info: "#2196f3",
+          success: "#4caf50",
         },
       },
     },
