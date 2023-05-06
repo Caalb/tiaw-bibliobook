@@ -56,6 +56,7 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
+	layout: 'empty',
   data: () => ({
     loading: false,
     snackbar: false,
