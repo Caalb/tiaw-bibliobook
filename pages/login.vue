@@ -1,8 +1,7 @@
 <template>
 	<v-app>
-		<div class="backgruond"></div>
-		<v-main class="d-flex justify-center align-center">
-			<v-col cols="10" lg="4" class="mx-auto">
+		<v-main class="d-flex justify-center align-center p-0">
+			<v-col cols="10" lg="3" md="6" class="mx-auto">
 				<v-card class="pa-4">
 					<div class="text-center">
 						<v-avatar size="100" color="indigo lighten-4">
@@ -66,7 +65,8 @@ export default {
     password: '',
     passwordRules: [
       (v) => !!v || 'Uma senha é requerida',
-      (v) => (v && v.length >= 6) || 'A senha precisa ter 6 caracteres ou mais!',
+      (v) =>
+        (v && v.length >= 6) || 'A senha precisa ter 6 caracteres ou mais!',
     ],
   }),
 
@@ -88,32 +88,26 @@ export default {
       setAuthentication: 'user/setAuthentication',
     }),
 
-    submitHandler() {
+    async submitHandler() {
       if (this.$refs.form.validate()) {
         this.loading = true;
 
         this.setUser(this.name);
         this.setAuthentication(true);
 
-        setTimeout(() => {
-          this.loading = false;
-          this.snackbar = true;
-          this.$router.push({
-            path: '/',
-          });
-        }, 3000);
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        this.loading = false;
+        this.snackbar = true;
+
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        this.$router.push({ path: '/' });
       }
     },
   },
 };
 </script>
-<style>
-.backgruond {
-  height: 300px;
-  width: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  background-size: cover;
+<style scoped>
+.container {
+  padding: 0 !important;
 }
 </style>
