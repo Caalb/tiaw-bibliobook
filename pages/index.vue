@@ -37,13 +37,4 @@ export default {
   },
 };
 </script>
-<style>
-  .backgruond {
-    height: 300px;
-    width: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    background-size: cover;
-  }
-</style>
+
