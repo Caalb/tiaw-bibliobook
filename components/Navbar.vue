@@ -1,51 +1,96 @@
 <template>
 	<nav>
-		<v-navigation-drawer
+		<v-app-bar color="primary" dark app>
+			<v-app-bar-nav-icon @click.stop="drawer = !drawer">
+			</v-app-bar-nav-icon>
+			
+			<v-toolbar-title class="text-uppercase">
+				<span class="font-weight-light">Biblio</span><span>Book</span>
+			</v-toolbar-title>
+
+			<v-spacer></v-spacer>
+
+			<ToggleTheme />
+			<v-menu offset-y>
+				<template #activator="{ on }">
+					<v-btn text v-on="on">
+						<v-icon left>
+							mdi-chevron-down
+						</v-icon>
+
+						<span>Menu</span>
+					</v-btn>
+				</template>
+
+				<v-list flat>
+					<v-list-item
+						v-for="link in links"
+						:key="link.text"
+						router
+						:to="link.route"
+						active-class="border"
+					>
+						<v-list-item-title>
+							{{ link.text }}
+						</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+
+			<v-btn text>
+				<span>Exit</span>
+				<v-icon right>
+					mdi-exit-to-app
+				</v-icon>
+			</v-btn>
+		</v-app-bar>
+
+		<v-navigation-drawer 
 			v-model="drawer"
+			dark
 			app
-			:mini-variant.sync="mini"
-			permanent
+			class="primary darken-5"
 		>
-			<v-list-item class="px-2 my-2">
-				<v-list-item-avatar>
-					<v-img src="https://github.com/Caalb.png"></v-img>
-				</v-list-item-avatar>
+			<v-layout 
+				column
+				align-center
+			>
+				<v-flex class="mt-5">
+					<v-avatar size="75">
+						<img 
+							src="https://github.com/Caalb.png"
+							alt="Caalb" />
+					</v-avatar>
 
-				<v-list-item-title>Caalb</v-list-item-title>
+					<p
+						class="white--text subheading mt-2 text-center"
+					>
+						Caalb
+					</p>
+				</v-flex>
 
-				<v-btn
-					icon
-					@click.stop="mini = !mini"
-				>
-					<v-icon>mdi-chevron-left</v-icon>
-				</v-btn>
-			</v-list-item>
+			
+			</v-layout>
 
 			<v-divider></v-divider>
 
-			<v-list>
-				<v-list-item link>
-					<v-list-item-icon>
-						<v-icon>
-							mdi-book
-						</v-icon>
-					</v-list-item-icon>
+			<v-list flat>
+				<v-list-item
+					v-for="link in links"
+					:key="link.text"
+					router
+					:to="link.route"
+					active-class="border"
+				>
+					<v-list-item-action>
+						<v-icon>{{ link.icon }}</v-icon>
+					</v-list-item-action>
 
-					<v-list-item-title>
-						Meus livros
-					</v-list-item-title>
-				</v-list-item>
-
-				<v-list-item link>
-					<v-list-item-icon>
-						<v-icon>
-							mdi-magnify
-						</v-icon>
-					</v-list-item-icon>
-
-					<v-list-item-title>
-						Buscar livros
-					</v-list-item-title>
+					<v-list-item-content>
+						<v-list-item-title>
+							{{ link.text }}
+						</v-list-item-title>
+					</v-list-item-content>
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
@@ -53,14 +98,25 @@
 </template>
 
 <script>
-  export default {
-    name: 'BBHeader',
-
-    data() {
-      return {
-        drawer: true,
-				mini: false,
-      };
-    },
-  };
+import ToggleTheme from './partials/ToggleTheme.vue';
+export default {
+  name: 'BBNavbar',
+	components: {
+		ToggleTheme,
+	},
+	
+  data: () => ({
+    drawer: true,
+    links: [
+			{ icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
+      { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
+      { icon: 'mdi-book-search-outline', text: 'Buscar livros', route: '/books/search' },
+    ],
+  }),
+};
 </script>
+<style scoped>
+.border {
+  border-left: 4px solid #fafafa;
+}
+</style>
