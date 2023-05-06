@@ -1,5 +1,6 @@
 export default {
   setUser (state, payload) {
+    localStorage.setItem('user', payload);
     state.user_name = payload;
   },
 
