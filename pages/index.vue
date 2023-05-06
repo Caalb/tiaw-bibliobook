@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<h1>index</h1>
+		<h3>Home</h3>
 	</v-app>
 </template>
 
@@ -38,12 +38,12 @@ export default {
 };
 </script>
 <style>
-.backgruond {
-  height: 300px;
-  width: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  background-size: cover;
-}
+  .backgruond {
+    height: 300px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    background-size: cover;
+  }
 </style>
