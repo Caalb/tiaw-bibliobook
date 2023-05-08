@@ -36,13 +36,6 @@
 					</v-list-item>
 				</v-list>
 			</v-menu>
-
-			<v-btn text>
-				<span>Exit</span>
-				<v-icon right>
-					mdi-exit-to-app
-				</v-icon>
-			</v-btn>
 		</v-app-bar>
 
 		<v-navigation-drawer 
@@ -109,6 +102,7 @@ export default {
 			{ icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
       { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
       { icon: 'mdi-book-search-outline', text: 'Buscar livros', route: '/books/search' },
+			{ icon: 'mdi-exit-to-app', text: 'Sair', route: '/login' },
     ],
   }),
 };
