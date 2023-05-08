@@ -68,8 +68,6 @@
 						Caalb
 					</p>
 				</v-flex>
-
-			
 			</v-layout>
 
 			<v-divider></v-divider>
@@ -106,7 +104,7 @@ export default {
 	},
 	
   data: () => ({
-    drawer: true,
+    drawer: false,
     links: [
 			{ icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
       { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
