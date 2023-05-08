@@ -20,3 +20,13 @@ export default {
      },
 };
 </script>
+
+<style lang="scss">
+.theme--dark.v-application {
+  background-color: var(--v-background-base, #161616) !important;
+}
+
+.theme--light.v-application {
+  background-color: var(--v-background-base, rgb(235, 235, 235)) !important;
+}
+</style>
