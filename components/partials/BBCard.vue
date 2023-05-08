@@ -1,0 +1,85 @@
+<template>
+	<v-card
+		class="mx-auto"
+		max-width="300"
+		raised
+	>
+		<v-img
+			src="data:image/jpeg;base64,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"
+			height="200px"
+		></v-img>
+
+		<v-card-title>
+			O Homem de Giz
+		</v-card-title>
+
+		<v-card-subtitle>
+			C. J. TUDOR
+		</v-card-subtitle>
+
+		<v-card-actions class="justify-space-between mx-2">
+			<v-btn
+				color="success"
+				text
+			>
+				Comprar
+			</v-btn>
+
+			<v-dialog
+				transition="dialog-top-transition"
+				max-width="600"
+			>
+				<template #activator="{ on, attrs }">
+					<v-btn
+						color="orange lighten-2"
+						text
+						v-bind="attrs"
+						v-on="on"
+					>
+						Detalhes
+					</v-btn>
+				</template>
+
+				<template #default="dialog">
+					<v-card>
+						<v-toolbar
+							color="primary"
+							dark
+						>
+							O Homem de Giz
+						</v-toolbar>
+
+						<v-card-text>
+							<div>
+								<p class="text--primary">
+									Em 1986, Eddie e os amigos passam a maior parte dos dias andando de bicicleta pela pacata vizinhança em busca de aventuras. Os desenhos a giz são seu código secreto: homenzinhos rabiscados no asfalto; mensagens que só eles entendem. Mas um desenho misterioso leva o grupo de crianças até um corpo desmembrado e espalhado em um bosque. Depois disso, nada mais é como antes.
+									Em 2016, Eddie se esforça para superar o passado, até que um dia ele e os amigos de infância recebem um mesmo aviso: o desenho de um homem de giz enforcado. Quando um dos amigos aparece morto, Eddie tem certeza de que precisa descobrir o que de fato aconteceu trinta anos atrás.
+									Alternando habilidosamente entre presente e passado, O Homem de Giz traz o melhor do suspense: personagens maravilhosamente construídos, mistérios de prender o fôlego e reviravoltas que vão impressionar até os leitores mais escaldados.
+								</p>
+							</div>
+						</v-card-text>
+
+						<v-card-actions class="justify-end">
+							<v-btn
+								text
+								@click="dialog.value = false"
+							>
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</template>
+			</v-dialog>
+		</v-card-actions>
+	</v-card>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        show: false,
+      };
+    }, 
+  };
+</script>
