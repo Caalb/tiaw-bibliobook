@@ -10,6 +10,7 @@
 
 						<h2 class="indigo--text mt-3">Bibliobook</h2>
 					</div>
+
 					<v-form ref="form" @submit.prevent="submitHandler">
 						<v-card-text>
 							<v-text-field
@@ -36,6 +37,7 @@
 
 							<v-switch label="Lembre-me" color="indigo"></v-switch>
 						</v-card-text>
+
 						<v-card-actions class="justify-center">
 							<v-btn :loading="loading" type="submit" color="indigo">
 								<span class="white--text px-8">Login</span>
@@ -45,13 +47,14 @@
 				</v-card>
 			</v-col>
 		</v-main>
+		
 		<v-snackbar v-model="snackbar" top color="green">
 			Bem vindo, {{ name }}
 		</v-snackbar>
 	</v-app>
 </template>
 
-<script lang="ts">
+<script>
 import { mapState, mapMutations } from 'vuex';
 
 export default {
