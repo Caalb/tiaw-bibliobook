@@ -97,7 +97,7 @@ export default {
 	},
 	
   data: () => ({
-    drawer: false,
+    drawer: true,
     links: [
 			{ icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
       { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
