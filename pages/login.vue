@@ -43,6 +43,10 @@
 								<span class="white--text px-8">Login</span>
 							</v-btn>
 						</v-card-actions>
+
+						<p class="text-end mt-3 mb-0 text-caption">Ainda não tem uma conta?
+							<NuxtLink to="/sign" color="black">clica aqui para criar</NuxtLink>
+						</p>
 					</v-form>
 				</v-card>
 			</v-col>
