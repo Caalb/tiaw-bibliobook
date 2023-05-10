@@ -51,34 +51,16 @@
 					width="750"
 					justify="center"
 				>
-					<v-window
-						v-model="onboarding"
-						reverse
-					>
-						<v-window-item
-							v-for="n in length"
-							:key="`card-${n}`"
-						>
-							<v-card
-								color="grey"
-								height="200"
-							>
-								<v-row
-									class="fill-height"
-									align="center"
-									justify="center"
-								>
-									<h1
-										style="font-size: 5rem;"
-										class="white--text"
-									>
-										Slide {{ n }}
-									</h1>
+					<v-window v-model="onboarding">
+						<v-window-item v-for="n in length" :key="`card-${n}`">
+							<v-card color="grey" height="390">
+								<v-row class="fill-height" align="center" justify="center">
+									<v-img :src="`/slider/${n}.png`" height="400" :contain="false" :cover="true"/>
 								</v-row>
 							</v-card>
 						</v-window-item>
 					</v-window>
-    
+					
 					<v-card-actions class="justify-space-between">
 						<v-btn
 							text
@@ -151,7 +133,7 @@ export default {
       },
     ],
 
-    length: 3,
+    length: 7,
     onboarding: 0,
   }),
 
