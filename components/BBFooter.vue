@@ -4,8 +4,8 @@
 		padless
 		app
 		inset
-
 	>
+
 		<v-card
 			class="flex"
 			flat
