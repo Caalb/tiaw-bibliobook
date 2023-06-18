@@ -38,16 +38,16 @@
 <script>
 import BBMyBooksCard from '../../components/partials/BBMyBooksCard.vue';
 
-  export default {
-    name: 'BBBooks',
-    components: {
-      BBMyBooksCard,
-    },
+export default {
+  name: 'BBBooks',
+  components: {
+    BBMyBooksCard,
+  },
 
-    computed: {
-      getColorInput() {
-        return this.$vuetify.theme.isDark ? 'white' : 'dark';
-      },
+  computed: {
+    getColorInput() {
+      return this.$vuetify.theme.isDark ? 'white' : 'dark';
     },
-  };
+  },
+};
 </script>
