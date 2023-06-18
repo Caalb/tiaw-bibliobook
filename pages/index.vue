@@ -104,7 +104,6 @@
 import {
   mapState,
   mapMutations,
-  mapActions,
 } from 'vuex';
 
 export default {
@@ -149,8 +148,6 @@ export default {
     if (!is_auth || is_auth === 'null') {
       this.$router.push({ path: '/login' });
     }
-
-    this.fetchBooks();
   },
   computed: {
     ...mapState('user', {
@@ -164,8 +161,6 @@ export default {
 
   methods: {
     ...mapMutations({ setAuthentication: 'user/setAuthentication' }),
-    ...mapActions({ fetchBooks: 'book/fetchBooks'}),
-
     next() {
       this.onboarding = this.onboarding + 1 === this.length
         ? 0
