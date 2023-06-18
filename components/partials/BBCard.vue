@@ -1,20 +1,22 @@
 <template>
 	<v-card
 		class="mx-auto"
-		max-width="300"
+		max-width="250"
 		raised
 	>
 		<v-img
-			src="https://picsum.photos/400/300"
-			height="200px"
+			:src="getBookImage"
+			cover
+			height="375"
+			:alt="getBookTitle"
 		></v-img>
 
 		<v-card-title>
-			O Homem de Giz
+			{{ getBookTitle }}
 		</v-card-title>
 
 		<v-card-subtitle>
-			C. J. TUDOR
+			{{ getBookAuthors }}
 		</v-card-subtitle>
 
 		<v-card-actions class="justify-space-between mx-2">
@@ -46,15 +48,13 @@
 							color="primary"
 							dark
 						>
-							O Homem de Giz
+							{{ getBookTitle }}
 						</v-toolbar>
 
 						<v-card-text>
 							<div>
 								<p class="text--primary">
-									Em 1986, Eddie e os amigos passam a maior parte dos dias andando de bicicleta pela pacata vizinhança em busca de aventuras. Os desenhos a giz são seu código secreto: homenzinhos rabiscados no asfalto; mensagens que só eles entendem. Mas um desenho misterioso leva o grupo de crianças até um corpo desmembrado e espalhado em um bosque. Depois disso, nada mais é como antes.
-									Em 2016, Eddie se esforça para superar o passado, até que um dia ele e os amigos de infância recebem um mesmo aviso: o desenho de um homem de giz enforcado. Quando um dos amigos aparece morto, Eddie tem certeza de que precisa descobrir o que de fato aconteceu trinta anos atrás.
-									Alternando habilidosamente entre presente e passado, O Homem de Giz traz o melhor do suspense: personagens maravilhosamente construídos, mistérios de prender o fôlego e reviravoltas que vão impressionar até os leitores mais escaldados.
+									{{ getBookDescription }}
 								</p>
 							</div>
 						</v-card-text>
@@ -75,11 +75,51 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        show: false,
-      };
-    }, 
-  };
+export default {
+  name: 'BBCard',
+  props: {
+    book: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  computed: {
+    getVolumeInfo() {
+      const { volumeInfo = {} } = this.book;
+
+      return volumeInfo;
+    },
+
+    getBookImage() {
+      const { imageLinks: { thumbnail, small, medium, large } = {} } = this.getVolumeInfo;
+
+      return large ?? medium ?? small ?? thumbnail;
+    },
+
+    getBookTitle() {
+      const { title = '' } = this.getVolumeInfo;
+
+      return title;
+    },
+
+    getBookDescription() {
+      const { description = '' } = this.getVolumeInfo;
+
+      return description;
+    },
+
+    getBookAuthors() {
+      const { authors = []} = this.getVolumeInfo;
+
+      return authors.join(', ');
+    },
+  },
+
+  data() {
+    return {
+      show: false,
+    };
+  },
+};
 </script>
