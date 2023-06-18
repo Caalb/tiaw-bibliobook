@@ -3,7 +3,7 @@
 		<v-app-bar color="primary" dark app>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer">
 			</v-app-bar-nav-icon>
-			
+
 			<v-toolbar-title class="text-uppercase">
 				<span class="font-weight-light">Biblio</span><span>Book</span>
 			</v-toolbar-title>
@@ -38,19 +38,19 @@
 			</v-menu>
 		</v-app-bar>
 
-		<v-navigation-drawer 
+		<v-navigation-drawer
 			v-model="drawer"
 			dark
 			app
 			class="primary darken-5"
 		>
-			<v-layout 
+			<v-layout
 				column
 				align-center
 			>
 				<v-flex class="mt-5">
 					<v-avatar size="75">
-						<img 
+						<img
 							src="https://github.com/Caalb.png"
 							alt="Caalb" />
 					</v-avatar>
@@ -90,25 +90,25 @@
 
 <script>
 import ToggleTheme from './partials/ToggleTheme.vue';
+
 export default {
   name: 'BBNavbar',
-	components: {
-		ToggleTheme,
-	},
-	
+  components: { ToggleTheme },
   data: () => ({
     drawer: true,
     links: [
-			{ icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
+      { icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
       { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
       { icon: 'mdi-book-search-outline', text: 'Buscar livros', route: '/books/search' },
-			{ icon: 'mdi-exit-to-app', text: 'Sair', route: '/login' },
+      { icon: 'mdi-exit-to-app', text: 'Sair', route: '/login' },
     ],
   }),
 };
+
 </script>
+
 <style scoped>
 .border {
-  border-left: 4px solid #fafafa;
+  border-left: 4px solid #ffffff;
 }
 </style>

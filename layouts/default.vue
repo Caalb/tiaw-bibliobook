@@ -13,12 +13,13 @@ import Navbar from '../components/Navbar.vue';
 import BBFooter from '../components/BBFooter.vue';
 
 export default {
-    name: "DefaultLayout",
-    components: { 
-      Navbar,
-      BBFooter,
-     },
+  name: 'DefaultLayout',
+  components: {
+    Navbar,
+    BBFooter,
+  },
 };
+
 </script>
 
 <style lang="scss">

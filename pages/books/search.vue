@@ -32,14 +32,13 @@
 </template>
 
 <script>
-  import BBCard from './../../components/partials/BBCard.vue';
+import BBCard from './../../components/partials/BBCard.vue';
 
-  export default {
-    name: 'BBBooks',
-    components: {
-      BBCard,
-    },
-  };
+export default {
+  name: 'BBBooks',
+  components: { BBCard },
+};
+
 </script>
 
 <style scoped>

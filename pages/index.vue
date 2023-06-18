@@ -3,7 +3,7 @@
 		<v-row align="center" justify="center">
 			<v-col cols="12" sm="8" md="6" lg="4">
 				<h1
-					:class="{ 'dark' : getIsThemeDark}" 
+					:class="{ 'dark' : getIsThemeDark}"
 					class="text-center"
 				>
 					<vue-typer
@@ -22,7 +22,7 @@
 				</h1>
 
 				<p
-					:class="{ 'dark' : getIsThemeDark}" 
+					:class="{ 'dark' : getIsThemeDark}"
 					class="mt-8 text-center"
 				>
 					<vue-typer
@@ -60,7 +60,7 @@
 							</v-card>
 						</v-window-item>
 					</v-window>
-					
+
 					<v-card-actions class="justify-space-between">
 						<v-btn
 							text
@@ -101,7 +101,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import {
+  mapState,
+  mapMutations,
+  mapActions,
+} from 'vuex';
 
 export default {
   name: 'App',
@@ -143,10 +147,10 @@ export default {
     this.setAuthentication(is_auth);
 
     if (!is_auth || is_auth === 'null') {
-      this.$router.push({
-        path: '/login',
-      });
+      this.$router.push({ path: '/login' });
     }
+
+    this.fetchBooks();
   },
   computed: {
     ...mapState('user', {
@@ -160,16 +164,19 @@ export default {
 
   methods: {
     ...mapMutations({ setAuthentication: 'user/setAuthentication' }),
-    next () {
-        this.onboarding = this.onboarding + 1 === this.length
-          ? 0
-          : this.onboarding + 1;
-      },
-      prev () {
-        this.onboarding = this.onboarding - 1 < 0
-          ? this.length - 1
-          : this.onboarding - 1;
-      },
+    ...mapActions({ fetchBooks: 'book/fetchBooks'}),
+
+    next() {
+      this.onboarding = this.onboarding + 1 === this.length
+        ? 0
+        : this.onboarding + 1;
+    },
+
+    prev() {
+      this.onboarding = this.onboarding - 1 < 0
+        ? this.length - 1
+        : this.onboarding - 1;
+    },
   },
 };
 </script>

@@ -4,7 +4,7 @@
 		padless
 		app
 		inset
-    
+
 	>
 		<v-card
 			class="flex"
@@ -22,9 +22,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'BBFooter',
-  };
+export default {
+  name: 'BBFooter',
+};
 </script>
 
 
