@@ -3,8 +3,8 @@
 		<v-row justify="center">
 			<v-col cols="9" md="6" lg="4">
 				<v-text-field
-					v-model="searchQuery"
-					label="Buscar Livro"
+					v-model="book_data"
+					label="Buscar Livros"
 					outlined
 					append-icon="mdi-magnify"
 					color="white"
@@ -17,6 +17,7 @@
 					height="56"
 					elevation="2"
 					text
+					@click="searchBooks"
 				>
 					Buscar
 				</v-btn>
@@ -24,8 +25,8 @@
 		</v-row>
 
 		<v-row>
-			<v-col v-for="i in 20" :key="i" cols="12" sm="6" md="4" lg="3">
-				<BBCard/>
+			<v-col v-for="book in getBooksResults" :key="book.id" cols="12" sm="6" md="4" lg="3">
+				<BBCard :book="book"/>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -33,10 +34,34 @@
 
 <script>
 import BBCard from './../../components/partials/BBCard.vue';
+import {
+  mapActions,
+  mapState,
+} from 'vuex';
 
 export default {
   name: 'BBBooks',
   components: { BBCard },
+  data: () => ({ book_data: ''}),
+
+  computed: {
+    ...mapState('book', {
+      getBooks: 'books',
+    }),
+
+    getBooksResults() {
+      const { items = []} = this.getBooks;
+
+      return items;
+    },
+  },
+
+  methods: {
+    ...mapActions({ fetchBooks: 'book/fetchBooks'}),
+    async searchBooks() {
+      await this.fetchBooks({ book_data: this.book_data });
+    },
+  },
 };
 
 </script>
