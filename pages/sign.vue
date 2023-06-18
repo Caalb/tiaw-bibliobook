@@ -59,7 +59,7 @@
 				</v-card>
 			</v-col>
 		</v-main>
-		
+
 		<v-snackbar v-model="snackbar" top color="green">
 			Bem vindo, {{ name }}
 		</v-snackbar>
@@ -71,7 +71,7 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
-	layout: 'empty',
+  layout: 'empty',
   data: () => ({
     loading: false,
     snackbar: false,
