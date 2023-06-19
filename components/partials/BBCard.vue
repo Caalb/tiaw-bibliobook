@@ -51,7 +51,7 @@
 							{{ getBookTitle }}
 						</v-toolbar>
 
-						<v-card-text>
+						<v-card-text class="mt-4">
 							<div>
 								<p class="text--primary">
 									{{ getBookDescription }}
@@ -64,17 +64,24 @@
 								text
 								@click="dialog.value = false"
 							>
-								Close
+								Fechar
 							</v-btn>
 						</v-card-actions>
 					</v-card>
 				</template>
 			</v-dialog>
+
+			<v-btn icon @click="setFavoriteBook">
+				<v-icon color="error">{{ favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
+			</v-btn>
 		</v-card-actions>
 	</v-card>
 </template>
 
 <script>
+import { removeFavoriteBook } from '../../helpers/removeFavoriteBook';
+import { setFavoriteBook } from '../../helpers/setFavoriteBook.js';
+
 export default {
   name: 'BBCard',
   props: {
@@ -82,6 +89,13 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  data() {
+    return {
+      show: false,
+      favorite: false,
+    };
   },
 
   computed: {
@@ -94,7 +108,11 @@ export default {
     getBookImage() {
       const { imageLinks: { thumbnail, small, medium, large } = {} } = this.getVolumeInfo;
 
-      return large ?? medium ?? small ?? thumbnail;
+      return large ??
+			medium ??
+			small ??
+			thumbnail ??
+			'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
     },
 
     getBookTitle() {
@@ -116,10 +134,18 @@ export default {
     },
   },
 
-  data() {
-    return {
-      show: false,
-    };
+  methods: {
+    setFavoriteBook() {
+      setFavoriteBook({ book: this.book });
+
+      if (this.favorite) {
+        const { id: book_id } = this.book;
+
+	      removeFavoriteBook({ book_id });
+      }
+
+      this.favorite = ! this.favorite;
+    },
   },
 };
 </script>
