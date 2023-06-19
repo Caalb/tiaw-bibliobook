@@ -1,17 +1,17 @@
 <template>
 	<v-card class="mx-auto" max-width="300" raised>
-		<v-img :src="book.image" height="200px"></v-img>
+		<v-img :src="getBookImage" height="200px"></v-img>
 
-		<v-card-title>{{ book.title }}</v-card-title>
+		<v-card-title>{{ getBookTitle }}</v-card-title>
 
-		<v-card-subtitle>{{ book.author }}</v-card-subtitle>
+		<v-card-subtitle>{{ getBookAuthors }}</v-card-subtitle>
 
 		<v-card-actions>
 			<v-btn icon @click="favorite = !favorite">
 				<v-icon color="error">{{ !favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
 			</v-btn>
 
-			<v-rating v-model="rating" half-increments color="warning"></v-rating>
+			<v-rating v-model="getBookRating" half-increments color="warning"></v-rating>
 		</v-card-actions>
 
 		<v-card-actions>
@@ -36,13 +36,13 @@
 							color="primary"
 							dark
 						>
-							{{ book.title }}
+							{{ getBookTitle }}
 						</v-toolbar>
 
 						<v-card-text>
 							<div>
 								<p class="text--primary">
-									{{ book.description }}
+									{{ getBookDescription }}
 								</p>
 							</div>
 						</v-card-text>
@@ -64,18 +64,53 @@
 
 <script>
 export default {
-  data() {
-    return {
-      book: {
-        title: 'The Hitchhiker\'s Guide to the Galaxy',
-        author: 'Douglas Adams',
-        description:
-          'Seconds before the Earth is demolished to make way for a galactic freeway, Arthur Dent is plucked off the planet by his friend Ford Prefect, a researcher for the revised edition of The Hitchhiker\'s Guide to the Galaxy who, for the last fifteen years, has been posing as an out-of-work actor. Together, this dynamic pair began a journey through space aided by a galaxyful of fellow travelers: Zaphod Beeblebrox, the two-headed, three-armed ex-hippie and totally out-to-lunch president of the galaxy; Trillian (formerly Tricia McMillan), Zaphod\'s girlfriend, whom Arthur tried to pick up at a cocktail party once upon a time zone; Marvin, a paranoid, brilliant, and chronically depressed robot; Veet Voojagig, a former graduate student who is obsessed with the disappearance of all the ballpoint pens he bought over the years.',
-        image: 'https://picsum.photos/400/300',
-      },
-      favorite: false,
-      rating: 4,
-    };
+  props: {
+    book: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  computed: {
+    getVolumeInfo() {
+      const { volumeInfo = {} } = this.book;
+
+      return volumeInfo;
+    },
+
+    getBookImage() {
+      const { imageLinks: { thumbnail, small, medium, large } = {} } = this.getVolumeInfo;
+
+      return large ??
+			medium ??
+			small ??
+			thumbnail ??
+			'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg';
+    },
+
+    getBookTitle() {
+      const { title = '' } = this.getVolumeInfo;
+
+      return title;
+    },
+
+    getBookDescription() {
+      const { description = '' } = this.getVolumeInfo;
+
+      return description;
+    },
+
+    getBookAuthors() {
+      const { authors = []} = this.getVolumeInfo;
+
+      return authors.join(', ');
+    },
+
+    getBookRating() {
+      const { averageRating } = this.getVolumeInfo;
+
+      return averageRating;
+    },
   },
 };
 </script>
