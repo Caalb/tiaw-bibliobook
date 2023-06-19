@@ -27,8 +27,8 @@
 		</v-row>
 
 		<v-row>
-			<v-col v-for="i in 7" :key="i" cols="12" sm="6" md="4" lg="3">
-				<BBMyBooksCard/>
+			<v-col v-for="book in getFavoritesBooks" :key="book.id" cols="12" sm="6" md="4" lg="3">
+				<BBMyBooksCard :book="book"/>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -37,6 +37,8 @@
 
 <script>
 import BBMyBooksCard from '../../components/partials/BBMyBooksCard.vue';
+
+import { getFavoritesBooks } from '../../helpers/getFavoritesBooks';
 
 export default {
   name: 'BBBooks',
@@ -47,6 +49,10 @@ export default {
   computed: {
     getColorInput() {
       return this.$vuetify.theme.isDark ? 'white' : 'dark';
+    },
+
+    getFavoritesBooks() {
+      return getFavoritesBooks();
     },
   },
 };
