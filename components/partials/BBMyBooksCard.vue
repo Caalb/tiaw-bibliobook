@@ -7,7 +7,7 @@
 		<v-card-subtitle>{{ getBookAuthors }}</v-card-subtitle>
 
 		<v-card-actions>
-			<v-btn icon @click="favorite = !favorite">
+			<v-btn icon @click="setFavoriteBook">
 				<v-icon color="error">{{ !favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
 			</v-btn>
 
@@ -72,6 +72,12 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  data() {
+    return {
+      favorite: false,
+    };
   },
 
   computed: {
