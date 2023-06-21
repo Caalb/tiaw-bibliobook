@@ -93,7 +93,6 @@ export default {
 
   data() {
     return {
-      show: false,
       favorite: false,
     };
   },
