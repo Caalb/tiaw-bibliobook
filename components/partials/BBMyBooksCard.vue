@@ -63,6 +63,9 @@
 </template>
 
 <script>
+import { removeFavoriteBook } from '../../helpers/removeFavoriteBook';
+import { setFavoriteBook } from '../../helpers/setFavoriteBook.js';
+
 export default {
   props: {
     book: {
@@ -110,6 +113,20 @@ export default {
       const { averageRating } = this.getVolumeInfo;
 
       return averageRating;
+    },
+  },
+
+  methods: {
+    setFavoriteBook() {
+      setFavoriteBook({ book: this.book });
+
+      if (this.favorite) {
+        const { id: book_id } = this.book;
+
+	      removeFavoriteBook({ book_id });
+      }
+
+      this.favorite = ! this.favorite;
     },
   },
 };
