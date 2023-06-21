@@ -56,9 +56,23 @@ export default {
     },
   },
 
+  mounted() {
+    const { query} = this.$route;
+    const { q: book_data} = query;
+
+    if (Object.keys(query).length > 0 && book_data) {
+      this.book_data = book_data;
+      this.fetchBooks({ book_data });
+    }
+  },
+
   methods: {
     ...mapActions({ fetchBooks: 'book/fetchBooks'}),
     async searchBooks() {
+      const encodedQuery = encodeURIComponent(this.book_data);
+
+      this.$router.push({ name: 'books-search', query: { q: encodedQuery } });
+
       await this.fetchBooks({ book_data: this.book_data });
     },
   },
