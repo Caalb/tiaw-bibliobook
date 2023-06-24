@@ -8,7 +8,7 @@
 
 		<v-card-actions>
 			<v-btn icon @click="setFavoriteBook">
-				<v-icon color="error">{{ !favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
+				<v-icon color="error">{{ favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
 			</v-btn>
 
 			<v-rating v-model="getBookRating" half-increments color="warning"></v-rating>
@@ -76,7 +76,7 @@ export default {
 
   data() {
     return {
-      favorite: false,
+      favorite: true,
     };
   },
 
@@ -110,7 +110,7 @@ export default {
     },
 
     getBookAuthors() {
-      const { authors = []} = this.getVolumeInfo;
+      const { authors = [] } = this.getVolumeInfo;
 
       return authors.join(', ');
     },
