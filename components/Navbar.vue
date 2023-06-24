@@ -28,7 +28,7 @@
 						:key="link.text"
 						router
 						:to="link.route"
-						active-class="border"
+						:class="{ 'secondary--text': isActiveLink(link.route) }"
 					>
 						<v-list-item-title>
 							{{ link.text }}
@@ -51,14 +51,18 @@
 				<v-flex class="mt-5">
 					<v-avatar size="75">
 						<img
-							src="https://github.com/Caalb.png"
-							alt="Caalb" />
+							:src="avatarImage"
+							:alt="getUserName"
+							@click="updateFile"
+						/>
+
+						<input ref="fileInput" type="file" style="display: none;" @change="handleFileUpload" />
 					</v-avatar>
 
 					<p
 						class="white--text subheading mt-2 text-center"
 					>
-						Caalb
+						{{ getUserName }}
 					</p>
 				</v-flex>
 			</v-layout>
@@ -71,7 +75,7 @@
 					:key="link.text"
 					router
 					:to="link.route"
-					active-class="border"
+					:class="{ 'border': isActiveLink(link.route) }"
 				>
 					<v-list-item-action>
 						<v-icon>{{ link.icon }}</v-icon>
@@ -91,11 +95,14 @@
 <script>
 import ToggleTheme from './partials/ToggleTheme.vue';
 
+import { getUserName } from './../helpers/getUserName';
+
 export default {
   name: 'BBNavbar',
   components: { ToggleTheme },
   data: () => ({
-    drawer: true,
+    drawer: false,
+    avatarImage: '',
     links: [
       { icon: 'mdi-home-circle-outline', text: 'Home', route: '/' },
       { icon: 'mdi-book-open-page-variant-outline', text: 'Meus livros', route: '/books' },
@@ -103,6 +110,39 @@ export default {
       { icon: 'mdi-exit-to-app', text: 'Sair', route: '/login' },
     ],
   }),
+
+  computed: {
+    getUserName() {
+      return getUserName();
+    },
+  },
+
+  created() {
+    this.avatarImage = localStorage.getItem('avatarImage') || 'https://www.fatosdesconhecidos.com.br/wp-content/plugins/wp-user-avatars/wp-user-avatars/assets/images/mystery.jpg';
+  },
+
+  methods: {
+    updateFile() {
+      this.$refs.fileInput.click();
+    },
+
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64Image = reader.result;
+        this.avatarImage = base64Image;
+        localStorage.setItem('avatarImage', base64Image);
+      };
+
+      reader?.readAsDataURL(file);
+    },
+
+    isActiveLink(route) {
+      return this.$route.path === route;
+    },
+  },
 };
 
 </script>
