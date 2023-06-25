@@ -76,6 +76,12 @@ import {
 export default {
   name: 'BBBooks',
   components: { BBCard },
+  head() {
+    return {
+      title: 'BB | Buscar livros',
+    };
+  },
+
   data: () => ({
     book_data: '',
     request_pending: false,

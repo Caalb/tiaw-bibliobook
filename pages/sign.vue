@@ -88,7 +88,7 @@ export default {
 
   head() {
     return {
-      title: 'BB | Login',
+      title: 'BB | Criar conta',
     };
   },
 

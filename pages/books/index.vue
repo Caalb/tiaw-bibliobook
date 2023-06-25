@@ -49,8 +49,11 @@ import { getFavoritesBooks } from '../../helpers/getFavoritesBooks';
 
 export default {
   name: 'BBBooks',
-  components: {
-    BBMyBooksCard,
+  components: { BBMyBooksCard},
+  head() {
+    return {
+      title: 'BB | Meus favoritos',
+    };
   },
 
   data() {
