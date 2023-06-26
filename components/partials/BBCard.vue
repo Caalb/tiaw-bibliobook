@@ -33,7 +33,7 @@
 
 			<v-dialog
 				transition="dialog-top-transition"
-				max-width="600"
+				max-width="800"
 			>
 				<template #activator="{ on, attrs }">
 					<v-btn
@@ -92,7 +92,7 @@
 										justify="center"
 										class="mt-6"
 									>
-										<v-col cols="3">
+										<v-col cols="6">
 											<div class="element">
 												<div class="rating">
 													<p class="text--primary d-inline">
@@ -117,7 +117,7 @@
 											vertical
 										></v-divider>
 
-										<v-col cols="3">
+										<v-col cols="5">
 											<div class="element">
 												<div>
 													<p class="text--primary d-inline">
@@ -137,7 +137,7 @@
 									<div class="d-flex justify-center">
 										<v-dialog
 											transition="dialog-top-transition"
-											max-width="600"
+											max-width="1000"
 										>
 											<template #activator="{ on, attrs }">
 												<v-btn
@@ -169,7 +169,8 @@
 														<v-btn
 															text
 															@click="dialog_description.value = false"
-														>Close
+														>
+															Close
 														</v-btn>
 													</v-card-actions>
 												</v-card>

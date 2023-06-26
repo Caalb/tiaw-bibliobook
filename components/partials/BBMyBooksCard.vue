@@ -36,7 +36,7 @@
 		<v-card-actions>
 			<v-dialog
 				transition="dialog-bottom-transition"
-				fullscreen
+				max-width="800"
 			>
 				<template #activator="{ on, attrs }">
 					<v-btn
