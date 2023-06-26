@@ -23,6 +23,10 @@
 			<v-btn
 				color="success"
 				text
+				link
+				:disabled="! getPurchaseLink"
+				:href="getPurchaseLink"
+				target="_blank"
 			>
 				Comprar
 			</v-btn>
@@ -72,7 +76,9 @@
 			</v-dialog>
 
 			<v-btn icon @click="setFavoriteBook">
-				<v-icon color="error">{{ favorite ? 'mdi-heart' : 'mdi-heart-outline' }}</v-icon>
+				<v-icon color="error">
+					{{ favorite ? 'mdi-heart' : 'mdi-heart-outline' }}
+				</v-icon>
 			</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -127,9 +133,15 @@ export default {
     },
 
     getBookAuthors() {
-      const { authors = []} = this.getVolumeInfo;
+      const { authors = [] } = this.getVolumeInfo;
 
       return authors.join(', ');
+    },
+
+    getPurchaseLink() {
+      const { saleInfo: { buyLink } = {} } = this.book;
+
+      return buyLink;
     },
   },
 
