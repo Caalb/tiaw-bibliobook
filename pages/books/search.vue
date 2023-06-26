@@ -56,7 +56,7 @@
 				class="d-flex justify-center mt-5"
 			>
 				<v-progress-circular
-					:size="70"
+					:size="50"
 					:width="7"
 					:color="$vuetify.theme.isDark ? 'success' : 'primary'"
 					indeterminate
@@ -114,11 +114,11 @@ export default {
   },
 
   mounted() {
-    const { query} = this.$route;
+    const { query } = this.$route;
     const { q: book_data} = query;
 
     if (Object.keys(query).length > 0 && book_data) {
-      this.book_data = book_data;
+      this.book_data = decodeURIComponent(book_data);
       this.request_pending = true;
 
       this.fetchBooks({ book_data });
