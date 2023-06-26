@@ -200,7 +200,7 @@
 								text
 								@click="dialog.value = false"
 							>
-								<!-- Fechar -->
+								Fechar
 							</v-btn>
 						</v-card-actions>
 					</v-card>

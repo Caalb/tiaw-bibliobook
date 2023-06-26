@@ -48,19 +48,148 @@
 
 				<template #default="dialog">
 					<v-card>
-						<v-toolbar
-							color="primary"
-							dark
-						>
-							{{ getBookTitle }}
-						</v-toolbar>
+						<v-card-text>
+							<v-row class="info-container">
+								<v-col
+									cols="12"
+									md="6"
+									class="d-flex justify-center">
+									<img
+										:src="getBookImage"
+										cover
+										width="230"
+										height="345"
+										:alt="getBookTitle"
+										class="img-container"
+									/>
+								</v-col>
 
-						<v-card-text class="mt-4">
-							<div>
-								<p class="text--primary">
-									{{ getBookDescription }}
-								</p>
-							</div>
+								<v-col
+									cols="12"
+									md="6"
+								>
+									<h1>
+										{{ getBookTitle }}
+									</h1>
+
+									<p class="text--primary mt-4">
+										{{ getBookAuthors }}
+									</p>
+
+									<div>
+										<p class="text--secondary publisher-paragraph">
+											{{ getPublishedDate }},
+										</p>
+
+										<p class="text--secondary publisher-paragraph">
+											{{ getPubliesher }}
+										</p>
+									</div>
+
+
+									<v-row
+										align="center"
+										justify="center"
+										class="mt-6"
+									>
+										<v-col cols="3">
+											<div class="element">
+												<div class="rating">
+													<p class="text--primary d-inline">
+														{{ getBookRating }}
+													</p>
+
+													<v-icon small class="icon-container">
+														mdi-star
+													</v-icon>
+
+													<br>
+
+													<p class="text--disabled rating-paragraph">
+														{{ getRatingsCount }} avaliações
+													</p>
+												</div>
+											</div>
+										</v-col>
+
+										<v-divider
+											class="divider-bar"
+											vertical
+										></v-divider>
+
+										<v-col cols="3">
+											<div class="element">
+												<div>
+													<p class="text--primary d-inline">
+														{{ getPageCount }}
+													</p>
+
+													<br>
+
+													<p class="text--disabled rating-paragraph">
+														Páginas
+													</p>
+												</div>
+											</div>
+										</v-col>
+									</v-row>
+
+									<div class="d-flex justify-center">
+										<v-dialog
+											transition="dialog-top-transition"
+											max-width="600"
+										>
+											<template #activator="{ on, attrs }">
+												<v-btn
+													color="primary"
+													v-bind="attrs"
+													class="mt-6 ml-2"
+													v-on="on"
+												>
+													Descrição
+												</v-btn>
+											</template>
+
+											<template #default="dialog_description">
+												<v-card>
+													<v-toolbar
+														color="primary"
+														dark
+													>
+														Descrição
+													</v-toolbar>
+
+													<v-card-text>
+														<div class="pa-8">
+															{{ getBookDescription }}
+														</div>
+													</v-card-text>
+
+													<v-card-actions class="justify-end">
+														<v-btn
+															text
+															@click="dialog_description.value = false"
+														>Close
+														</v-btn>
+													</v-card-actions>
+												</v-card>
+											</template>
+										</v-dialog>
+
+										<v-btn
+											color="secondary"
+											link
+											:disabled="! getPurchaseLink"
+											:href="getPurchaseLink"
+											target="_blank"
+											class="mt-6 ml-2"
+										>
+											Comprar R${{ getBookPrice }}
+										</v-btn>
+
+									</div>
+								</v-col>
+							</v-row>
 						</v-card-text>
 
 						<v-card-actions class="justify-end">
@@ -143,6 +272,42 @@ export default {
 
       return buyLink;
     },
+
+    getBookRating() {
+      const { averageRating } = this.getVolumeInfo;
+
+      return averageRating || 0;
+    },
+
+    getPublishedDate() {
+      const { publishedDate } = this.getVolumeInfo;
+
+      return publishedDate;
+    },
+
+    getPubliesher() {
+      const { publisher } = this.getVolumeInfo;
+
+      return publisher;
+    },
+
+    getPageCount() {
+      const { pageCount } = this.getVolumeInfo;
+
+      return pageCount;
+    },
+
+    getRatingsCount() {
+      const { ratingsCount } = this.getVolumeInfo;
+
+      return ratingsCount || 0;
+    },
+
+    getBookPrice() {
+      const { saleInfo: { listPrice: { amount } = {} } = {} } = this.book;
+
+      return amount;
+    },
   },
 
   methods: {
@@ -160,3 +325,33 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+	.img-container {
+		box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+		border-radius: 4px;
+	}
+
+	.info-container { padding: 30px; }
+
+	.publisher-paragraph {
+		display: inline;
+		font-size: 10px;
+	}
+
+	.rating-paragraph {
+		display: inline;
+		font-size: 12px;
+	}
+
+	.icon-container { margin-bottom: 2px; }
+
+	.element {
+  	text-align: center;
+	}
+
+	.divider-bar {
+		height: 25px;
+		margin: auto 0;
+	}
+</style>
