@@ -170,7 +170,7 @@
 															text
 															@click="dialog_description.value = false"
 														>
-															Close
+															Fechar
 														</v-btn>
 													</v-card-actions>
 												</v-card>
