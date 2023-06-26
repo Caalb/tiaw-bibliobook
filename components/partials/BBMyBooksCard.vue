@@ -95,7 +95,7 @@
 										justify="center"
 										class="mt-6"
 									>
-										<v-col cols="3">
+										<v-col cols="6">
 											<div class="element">
 												<div class="rating">
 													<p class="text--primary d-inline">
@@ -120,7 +120,7 @@
 											vertical
 										></v-divider>
 
-										<v-col cols="3">
+										<v-col cols="5">
 											<div class="element">
 												<div>
 													<p class="text--primary d-inline">
