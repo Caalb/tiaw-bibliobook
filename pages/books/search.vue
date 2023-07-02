@@ -2,7 +2,7 @@
 	<v-container>
 		<v-row justify="center">
 			<v-col
-				cols="9"
+				cols="7"
 				md="6"
 				lg="4"
 			>
@@ -16,8 +16,9 @@
 			</v-col>
 
 			<v-col
-				cols="3"
-				md="2"
+				cols="4"
+				md="3"
+				class="d-md-flex"
 			>
 				<v-btn
 					:color="$vuetify.theme.isDark ? 'success' : 'primary'"
@@ -28,6 +29,12 @@
 				>
 					Buscar
 				</v-btn>
+
+				<v-switch
+					v-model="free_books"
+					class="ml-5"
+					label="Apenas gratuitos"
+				></v-switch>
 			</v-col>
 		</v-row>
 
@@ -44,7 +51,7 @@
 					<BBCard :book="book"/>
 				</v-col>
 
-				<v-col v-if="getEmptyResult">
+				<v-col v-if="getEmptyResult && ! request_pending">
 					<p class="text-center mr-4 mt-5">
 						{{ getMessage }}
 					</p>
@@ -63,6 +70,15 @@
 				></v-progress-circular>
 			</v-col>
 		</v-row>
+
+		<v-pagination
+			v-if="! getEmptyResult && ! request_pending"
+			v-model="page"
+			class="mt-5"
+			:length="getPaginationLength"
+			:total-visible="7"
+			circle
+		></v-pagination>
 	</v-container>
 </template>
 
@@ -85,6 +101,8 @@ export default {
   data: () => ({
     book_data: '',
     request_pending: false,
+    free_books: false,
+    page: 1,
   }),
 
   computed: {
@@ -111,6 +129,10 @@ export default {
 
       return 'Livro não encontrado.';
     },
+
+    getPaginationLength() {
+      return 7;
+    },
   },
 
   mounted() {
@@ -118,8 +140,8 @@ export default {
     const { q: book_data} = query;
 
     if (Object.keys(query).length > 0 && book_data) {
-      this.book_data = decodeURIComponent(book_data);
       this.request_pending = true;
+      this.book_data = decodeURIComponent(book_data);
 
       this.fetchBooks({ book_data });
 
@@ -127,16 +149,34 @@ export default {
     }
   },
 
+  watch: {
+    page() {
+      this.searchBooks();
+    },
+
+    free_books() {
+      this.page = 1;
+    },
+  },
+
   methods: {
     ...mapActions({ fetchBooks: 'book/fetchBooks'}),
     async searchBooks() {
       const encodedQuery = encodeURIComponent(this.book_data);
 
-      this.$router.push({ name: 'books-search', query: { q: encodedQuery } });
+      this.$router.push({
+        name: 'books-search',
+        query: { q: encodedQuery },
+      });
 
       if (this.book_data) {
         this.request_pending = true;
-        await this.fetchBooks({ book_data: this.book_data });
+        await this.fetchBooks({
+          book_data: this.book_data,
+          free_books: this.free_books,
+          start_index: Math.floor((this.page - 1) * 10),
+        });
+
         this.request_pending = false;
       }
     },
