@@ -27,7 +27,7 @@
 			</v-btn>
 
 			<v-rating
-				v-model="getBookRating"
+				v-model="rating"
 				half-increments
 				color="warning">
 			</v-rating>
@@ -214,6 +214,8 @@
 <script>
 import { removeFavoriteBook } from '../../helpers/removeFavoriteBook';
 import { setFavoriteBook } from '../../helpers/setFavoriteBook.js';
+import { getFavoritesBooks } from '../../helpers/getFavoritesBooks';
+
 
 export default {
   props: {
@@ -226,8 +228,24 @@ export default {
   data() {
     return {
       favorite: true,
+      rating: 0,
     };
   },
+
+  watch: {
+    rating(value) {
+      const  { id } = this.book;
+      const favorites_books = getFavoritesBooks();
+      const book = favorites_books.find((e) => e.id === id);
+
+      if (book) {
+        book.volumeInfo.averageRating = value;
+
+        localStorage.setItem('favorites_books', JSON.stringify(favorites_books));
+      }
+    },
+  },
+
 
   computed: {
     getVolumeInfo() {
@@ -291,7 +309,7 @@ export default {
     getRatingsCount() {
       const { ratingsCount } = this.getVolumeInfo;
 
-      return ratingsCount || 0;
+      return ratingsCount  || 0;
     },
 
     getPurchaseLink() {
@@ -305,6 +323,11 @@ export default {
 
       return amount;
     },
+  },
+
+  mounted() {
+    const { averageRating } = this.getVolumeInfo;
+    this.rating = averageRating;
   },
 
   methods: {
